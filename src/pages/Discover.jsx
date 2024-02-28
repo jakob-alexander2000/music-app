@@ -1,14 +1,21 @@
 // Importing necessary components and constants
+import { useDispatch, useSelector } from "react-redux";
+
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
+import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 
 // Functional component for the Discover page
 const Discover = () => {
+
+    const dispatch = useDispatch();
+    const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const { data, isFetching, error } = useGetTopChartsQuery();  
   // Setting the default genre title to 'Pop'
   const genreTitle = 'Pop';
+  if(isFetching) return <Loader title="Loading Songs..."/>;
+  if(error) return <Error />;  
 
-  // Logging the available genres to the console
-  console.log(genres);
 
   // Return JSX for the Discover component
   return (
@@ -28,12 +35,15 @@ const Discover = () => {
 
       {/* Displaying a grid of SongCard components */}
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {/* Mapping through an array of numbers to create SongCard components */}
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((song, i) => (
+        {/* Mapping over real data instead of previous dummy array */}
+        {data?.map((song, i) => (
           <SongCard
             key={song.key}
             song={song}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
             i={i}
+            data={data}
           />
         ))}
       </div>
