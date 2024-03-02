@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { build } from 'vite';
+// import { build } from 'vite';
 
 
 // const options = {
@@ -33,6 +33,7 @@ import { build } from 'vite';
         getSongRelated: builder.query({ query: ({ songid }) => `/tracks/related?track_id=${songid}` }),
         getArtistDetails: builder.query({query: (artistId) => `/artists/details?artist_id=${artistId}` }),
         getSongsByCountry: builder.query({ query: (countryCode) => `/charts/country?country_code=${countryCode}`}),
+        getSongsBySearch: builder.query({ query: (searchTerm) => `/search/multi?search_type=SONGS_ARTIST&query=${searchTerm}`}),
     }),
     });
 
@@ -42,5 +43,6 @@ import { build } from 'vite';
         useGetSongDetailsQuery,
         useGetSongRelatedQuery,
         useGetArtistDetailsQuery,
-        useGetSongsByCountryQuery
+        useGetSongsByCountryQuery,
+        useGetSongsBySearchQuery,
     } = shazamCoreApi;
