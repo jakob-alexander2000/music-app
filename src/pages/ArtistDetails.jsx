@@ -5,7 +5,7 @@ import { DetailsHeader, Error, Loader, RelatedSongs } from "../components";
 import { useGetArtistDetailsQuery } from '../redux/services/shazamCore';
 
 
-// Rapid Api-Endpoint deprecated
+
 const ArtistDetails = () => {
    
     const { id: artistId} = useParams();
