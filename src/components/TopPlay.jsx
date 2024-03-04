@@ -21,7 +21,7 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handle
         <p className="text-xl font-bold text-white">{song?.title}</p>
       </Link>
       <Link to={`/artists/${song?.artists[0].adamid}`}>
-        <p className="text-base text-gray-300 mt-1">{song?.title}</p>
+        <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
       </Link>
     </div>
     </div>
@@ -79,7 +79,7 @@ const TopPlay = () => {
             isPlaying={isPlaying}
             activeSong={activeSong}
             handlePauseClick={handlePauseClick}
-            handlePlayClick={handlePlayClick}/>
+            handlePlayClick={() => handlePlayClick(song,i)}/>
           ))}
         </div>
       </div>
@@ -101,14 +101,14 @@ const TopPlay = () => {
         centeredSlidesBounds
         modules={[FreeMode]}
         className="mt-4">
-          {topPlays?.map((song, i) => (
+          {topPlays?.slice(0, 5).map((artist) => (
             <SwiperSlide
-            key={song?.key}
+            key={artist?.key}
             style={{width: '25%', height: 'auto'}}
             className="shadow-lg rounded-full animate-slideright"
             >
-              <Link to={`/artists/${song?.artists[0].adamid}`}>
-                <img src={song?.images.background} alt="name"
+              <Link to={`/artists/${artist?.artists[0].adamid}`}>
+                <img src={artist?.images.background} alt="name"
                 className="rounded-full w-full object-cover" />
               </Link>
             </SwiperSlide>
