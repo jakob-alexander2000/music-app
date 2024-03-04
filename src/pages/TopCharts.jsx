@@ -9,8 +9,8 @@ const { activeSong, isPlaying } = useSelector((state) => state.player);
 const { data, isFetching, error } = useGetTopChartsQuery();
 
 if (isFetching) return
-<Loader title="Loading Top Charts around you"/>;
-if (error && country) return <Error />;
+<Loader title="Loading Top Charts"/>;
+if (error) return <Error />;
 
 
 return (
